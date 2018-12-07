@@ -16,7 +16,6 @@ import com.seibel.gabriel.kobemovies.view.MovieListFragment.OnMovieListInteracti
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.movie.view.*
-import org.w3c.dom.Text
 
 
 /**
@@ -57,8 +56,7 @@ class MovieRecyclerViewAdapter(
 
         //bind text fields
         holder.title.text = movie.title
-        holder.realeaseDate.text = movie.prettyReleaseDate()
-        holder.overview.text = movie.overview
+        holder.releaseDate.text = movie.styledReleaseDate()
 
         //load image async with picasso
         Picasso.with(listener as Context)
@@ -76,12 +74,11 @@ class MovieRecyclerViewAdapter(
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val title: TextView = mView.title
-        val realeaseDate: TextView = mView.release_date
-        val overview: TextView = mView.overview
+        val releaseDate: TextView = mView.release_date
         val poster: ImageView = mView.poster
 
         override fun toString(): String {
-            return super.toString() + " '" + overview.text + "'"
+            return super.toString() + " '" + title.text + "'"
         }
     }
 }

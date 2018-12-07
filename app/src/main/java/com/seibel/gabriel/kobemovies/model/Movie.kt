@@ -6,15 +6,18 @@ data class Movie(
     val title: String,
     val overview: String,
     @SerializedName("poster_path") val posterPath: String,
-    @SerializedName("release_date") val releaseDate: String
+    @SerializedName("release_date") val releaseDate: String,
+    val popularity: String
 ) {
-    fun prettyReleaseDate(): String {
+    fun styledReleaseDate() = "Releases ${slashFormattedReleaseDate()}"
+
+    private fun slashFormattedReleaseDate(): String {
         val tokens = releaseDate.splitToSequence("-").toList()
 
         val year = tokens[0]
         val month= tokens[1]
         val day = tokens[2]
 
-        return "Release date: $month/$day/$year"
+        return "$month/$day/$year"
     }
 }
