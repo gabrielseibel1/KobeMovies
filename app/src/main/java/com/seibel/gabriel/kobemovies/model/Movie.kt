@@ -7,7 +7,7 @@ data class Movie(
     val overview: String,
     @SerializedName("poster_path") val posterPath: String,
     @SerializedName("release_date") val releaseDate: String,
-    val popularity: String
+    val popularity: Float
 ) {
     fun styledReleaseDate() = "Releases ${slashFormattedReleaseDate()}"
 

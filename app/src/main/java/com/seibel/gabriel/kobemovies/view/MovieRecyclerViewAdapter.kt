@@ -56,6 +56,7 @@ class MovieRecyclerViewAdapter(
 
         //bind text fields
         holder.title.text = movie.title
+        holder.popularity.text = "%.1f".format(movie.popularity)
         holder.releaseDate.text = movie.styledReleaseDate()
 
         //load image async with picasso
@@ -74,6 +75,7 @@ class MovieRecyclerViewAdapter(
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val title: TextView = mView.title
+        val popularity: TextView = mView.popularity
         val releaseDate: TextView = mView.release_date
         val poster: ImageView = mView.poster
 
