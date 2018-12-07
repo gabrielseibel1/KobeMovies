@@ -13,6 +13,9 @@ class MovieListActivity : AppCompatActivity(), MovieListFragment.OnMovieListInte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_list_activity)
+
+        title = getString(R.string.app_title)
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MovieListFragment.newInstance(1))
