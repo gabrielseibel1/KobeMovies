@@ -2,7 +2,6 @@ package com.seibel.gabriel.kobemovies.view
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,7 +26,7 @@ class MovieListFragment : Fragment() {
 
     private var movies: List<Movie> = listOf()
 
-    private var listener: OnMovieListInteractionListener? = null
+    //private var listener: OnMovieListInteractionListener? = null
 
     private lateinit var viewModel: MovieListViewModel
 
@@ -43,7 +42,7 @@ class MovieListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
+        val view = inflater.inflate(R.layout.movie_list_fragment, container, false)
 
         //configure UI
         if (view is CoordinatorLayout) {
@@ -75,7 +74,7 @@ class MovieListFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MovieRecyclerViewAdapter(movies.toList(), listener)
+                adapter = MovieRecyclerViewAdapter(movies.toList(), context)
             }
 
             //get view model from activity context
@@ -91,7 +90,7 @@ class MovieListFragment : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context) {
+    /*override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnMovieListInteractionListener) {
             listener = context
@@ -103,17 +102,16 @@ class MovieListFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         listener = null
-    }
+    }*/
 
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     */
     interface OnMovieListInteractionListener {
-        fun onMovieSelected(item: Movie)
-    }
+        fun onMovieSelected(movie: Movie)
+    }*/
 
     companion object {
 

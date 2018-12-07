@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import com.seibel.gabriel.kobemovies.R
 import com.seibel.gabriel.kobemovies.api.RetrofitAPI
 import com.seibel.gabriel.kobemovies.model.Movie
 
 
-import com.seibel.gabriel.kobemovies.view.MovieListFragment.OnMovieListInteractionListener
+//import com.seibel.gabriel.kobemovies.view.MovieListFragment.OnMovieListInteractionListener
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.movie.view.*
@@ -24,19 +25,9 @@ import kotlinx.android.synthetic.main.movie.view.*
  */
 class MovieRecyclerViewAdapter(
     private var movies: List<Movie>,
-    private val listener: OnMovieListInteractionListener?
+    private val context: Context
 ) : RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder>() {
 
-    private val mOnClickListener: View.OnClickListener
-
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as Movie
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            listener?.onMovieSelected(item)
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -60,14 +51,21 @@ class MovieRecyclerViewAdapter(
         holder.releaseDate.text = movie.styledReleaseDate()
 
         //load image async with picasso
-        Picasso.with(listener as Context)
+        Picasso.with(context)
             .load(RetrofitAPI.IMAGES_BASE_URL + movie.posterPath)
             .error(R.drawable.ic_launcher_foreground)
             .into(holder.poster)
 
         with(holder.mView) {
             tag = movie
-            setOnClickListener(mOnClickListener)
+
+            //navigate to other destination (movie details)
+            setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.action_movieListFragment_to_movieDetailsFragment,
+                    null
+                )
+            )
         }
     }
 
