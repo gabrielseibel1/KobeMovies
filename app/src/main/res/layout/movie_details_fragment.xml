@@ -15,8 +15,10 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/backdrop_card"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constrainedWidth="true"
+
             android:layout_margin="16dp"
             app:cardCornerRadius="8dp"
 
@@ -28,10 +30,11 @@
 
             <ImageView
                 android:id="@+id/backdrop"
+                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
                 android:contentDescription="@string/movie_backdrop"
+                android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_launcher_round" />
@@ -43,8 +46,8 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             android:layout_margin="32dp"
+
             android:text="@string/movie_title_stub"
             android:textAlignment="center"
             android:textSize="36sp"
@@ -58,7 +61,6 @@
             android:id="@+id/release_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="32dp"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
@@ -76,14 +78,26 @@
             android:id="@+id/overview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
 
-            android:layout_margin="16dp"
             android:text="@string/movie_overview_stub"
-
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/release_date" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/overview"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
