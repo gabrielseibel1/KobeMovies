@@ -55,6 +55,12 @@ class MovieDetailsFragment : Fragment() {
     }
 
     private fun updateUIWithMovie(movie: Movie) {
+        //bind text fields
+        title.text = movie.title
+        release_date.text = movie.styledReleaseDate()
+        overview.text = movie.overview
+
+
         //load image async with picasso
         Picasso.with(context)
             .load(RetrofitAPI.IMAGES_HIGH_RES_BASE_URL + movie.backdropPath)
