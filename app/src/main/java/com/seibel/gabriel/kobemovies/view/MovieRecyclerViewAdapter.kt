@@ -8,20 +8,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
+import com.google.gson.Gson
 import com.seibel.gabriel.kobemovies.R
 import com.seibel.gabriel.kobemovies.api.RetrofitAPI
 import com.seibel.gabriel.kobemovies.model.Movie
 
-
-//import com.seibel.gabriel.kobemovies.view.MovieListFragment.OnMovieListInteractionListener
 import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.movie.view.*
 
 
 /**
- * [RecyclerView.Adapter] that can display a [Movie] and makes a call to the
- * specified [OnMovieListInteractionListener].
+ * [RecyclerView.Adapter] that can display a [Movie] list
  */
 class MovieRecyclerViewAdapter(
     private var movies: List<Movie>,
@@ -60,12 +58,11 @@ class MovieRecyclerViewAdapter(
             tag = movie
 
             //navigate to other destination (movie details)
-            setOnClickListener(
-                Navigation.createNavigateOnClickListener(
-                    R.id.action_movieListFragment_to_movieDetailsFragment,
-                    null
-                )
-            )
+            setOnClickListener {
+                val directions = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment()
+                directions.setMovie(Gson().toJson(movies[position]))
+                Navigation.findNavController(this).navigate(directions)
+            }
         }
     }
 

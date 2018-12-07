@@ -46,7 +46,7 @@ class MovieListFragment : Fragment() {
 
         //configure UI
         if (view is CoordinatorLayout) {
-            configureList(view)
+            configureListAndViewModel(view)
             configureFloatingActionButton(view)
         }
 
@@ -64,7 +64,7 @@ class MovieListFragment : Fragment() {
         }
     }
 
-    private fun configureList(view: CoordinatorLayout) {
+    private fun configureListAndViewModel(view: CoordinatorLayout) {
         //set the adapter and the model view
         val recycler: View = view.getChildAt(0)
         if (recycler is RecyclerView) {
@@ -77,7 +77,7 @@ class MovieListFragment : Fragment() {
                 adapter = MovieRecyclerViewAdapter(movies.toList(), context)
             }
 
-            //get view model from activity context
+            //get view model
             viewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
 
             //observe movies in recycler
@@ -89,29 +89,6 @@ class MovieListFragment : Fragment() {
             })
         }
     }
-
-    /*override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnMovieListInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnMovieListInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }*/
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-    interface OnMovieListInteractionListener {
-        fun onMovieSelected(movie: Movie)
-    }*/
 
     companion object {
 
