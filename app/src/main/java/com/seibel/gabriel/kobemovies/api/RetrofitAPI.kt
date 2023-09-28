@@ -29,5 +29,7 @@ class RetrofitAPI {
         const val API_BASE_URL = "https://api.themoviedb.org/3/"
 
         const val IMAGES_BASE_URL = "https://image.tmdb.org/t/p/w500/"
+
+        const val IMAGES_HIGH_RES_BASE_URL = "https://image.tmdb.org/t/p/original/"
     }
 }

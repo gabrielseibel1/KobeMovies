@@ -21,7 +21,7 @@ class MovieListViewModel : ViewModel() {
         return movies
     }
 
-    private fun loadUpcomingMovies() {
+    fun loadUpcomingMovies() {
         //create api object
         val retrofitAPI = RetrofitAPI()
 

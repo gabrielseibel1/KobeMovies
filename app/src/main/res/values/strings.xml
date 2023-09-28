@@ -94,4 +94,9 @@
     <string name="movie_poster">Movie poster</string>
     <string name="movie_title_stub">Movie Title</string>
     <string name="movie_overview_stub">Movie overview ...</string>
+    <string name="release_date_stub">Releases 10/06/2019</string>
+    <string name="app_title">KobeMovies</string>
+    <string name="popularity_stub">87.4</string>
+    <string name="hype_level">Hype Level</string>
+    <string name="movie_backdrop">Movie backdrop</string>
 </resources>

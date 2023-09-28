@@ -2,7 +2,6 @@ package com.seibel.gabriel.kobemovies.view
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.seibel.gabriel.kobemovies.R
 import com.seibel.gabriel.kobemovies.model.Movie
 
@@ -26,7 +26,7 @@ class MovieListFragment : Fragment() {
 
     private var movies: List<Movie> = listOf()
 
-    private var listener: OnMovieListInteractionListener? = null
+    //private var listener: OnMovieListInteractionListener? = null
 
     private lateinit var viewModel: MovieListViewModel
 
@@ -42,60 +42,52 @@ class MovieListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
+        val view = inflater.inflate(R.layout.movie_list_fragment, container, false)
 
-        //set the adapter and the model view
+        //configure UI
         if (view is CoordinatorLayout) {
-
-            val recycler: View = view.getChildAt(0)
-            if (recycler is RecyclerView) {
-
-                with(recycler) {
-                    layoutManager = when {
-                        columnCount <= 1 -> LinearLayoutManager(context)
-                        else -> GridLayoutManager(context, columnCount)
-                    }
-                    adapter = MovieRecyclerViewAdapter(movies.toList(), listener)
-                }
-
-                //get view model from activity context
-                viewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
-
-                //observe movies in recycler
-                viewModel.getUpcomingMovies().observe(this, Observer<List<Movie>> { movies ->
-                    //update if observed data is non-null
-                    movies?.let {
-                        (recycler.adapter as MovieRecyclerViewAdapter).setData(movies)
-                    }
-                })
-            }
+            configureListAndViewModel(view)
+            configureFloatingActionButton(view)
         }
 
         return view
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnMovieListInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnMovieListInteractionListener")
+    private fun configureFloatingActionButton(view: CoordinatorLayout) {
+        val fab: View = view.getChildAt(1)
+        if (fab is FloatingActionButton) {
+
+            //make fab update items when clicked
+            fab.setOnClickListener {
+                viewModel.loadUpcomingMovies()
+            }
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
+    private fun configureListAndViewModel(view: CoordinatorLayout) {
+        //set the adapter and the model view
+        val recycler: View = view.getChildAt(0)
+        if (recycler is RecyclerView) {
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     */
-    interface OnMovieListInteractionListener {
-        fun onMovieSelected(item: Movie)
+            with(recycler) {
+                layoutManager = when {
+                    columnCount <= 1 -> LinearLayoutManager(context)
+                    else -> GridLayoutManager(context, columnCount)
+                }
+                adapter = MovieRecyclerViewAdapter(movies.toList(), context)
+            }
+
+            //get view model
+            viewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
+
+            //observe movies in recycler
+            viewModel.getUpcomingMovies().observe(this, Observer<List<Movie>> { movies ->
+                //update if observed data is non-null
+                movies?.let {
+                    (recycler.adapter as MovieRecyclerViewAdapter).setData(movies)
+                }
+            })
+        }
     }
 
     companion object {
