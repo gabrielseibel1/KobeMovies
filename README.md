@@ -1,6 +1,13 @@
 # KobeMovies
 Check upcoming movies from TMDB!
 
+## Screenshots
+
+![screenshot](https://github.com/gabrielseibel1/KobeMovies/blob/master/screenshots/KobeMovies_Screenshot1.jpg)
+![screenshot](https://github.com/gabrielseibel1/KobeMovies/blob/master/screenshots/KobeMovies_Screenshot2.jpg)
+![screenshot](https://github.com/gabrielseibel1/KobeMovies/blob/master/screenshots/KobeMovies_Screenshot3.jpg)
+![screenshot](https://github.com/gabrielseibel1/KobeMovies/blob/master/screenshots/KobeMovies_Screenshot4.jpg)
+
 ## Third-Party Libraries
 
 ### Retrofit 2 (with OKHTTP3)
